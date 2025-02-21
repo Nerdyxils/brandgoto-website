@@ -189,7 +189,6 @@
     "fs-extra": "^10.1.0",
     "fs-monkey": "^1.0.6",
     "fs.realpath": "^1.0.0",
-    "fsevents": "^2.3.3",
     "function-bind": "^1.1.2",
     "gensync": "^1.0.0-beta.2",
     "get-intrinsic": "^1.2.7",
@@ -583,14 +582,17 @@
     "yocto-queue": "^0.1.0"
   },
   "devDependencies": {
-      "fsevents": "^2.3.2",
-
     "@tailwindcss/postcss": "^4.0.8",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.3",
     "postcss-loader": "^8.1.1",
     "tailwindcss": "^4.0.8"
   },
+
+  "optionalDependencies": {
+  "fsevents": "^2.3.3"
+},
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
