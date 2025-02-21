@@ -583,6 +583,8 @@
     "yocto-queue": "^0.1.0"
   },
   "devDependencies": {
+      "fsevents": "^2.3.2",
+
     "@tailwindcss/postcss": "^4.0.8",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.5.3",
