@@ -3,5 +3,5 @@ module.exports = {
   theme: {
     extend: {}, // Add your custom styles here
   },
-  plugins: [], // Add any Tailwind plugins if needed
+  plugins: [], // Add Tailwind plugins if needed
 };
