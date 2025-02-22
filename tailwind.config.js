@@ -1,7 +1,7 @@
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"], // Adjust paths to match your project
+  content: ["./src/**/*.{js,jsx,ts,tsx}"], // Ensure correct paths
   theme: {
-    extend: {}, // Add your custom styles here
+    extend: {}, // Add custom styles if needed
   },
   plugins: [], // Add Tailwind plugins if needed
 };
