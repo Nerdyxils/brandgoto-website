@@ -109,16 +109,16 @@ function Home() {
 
         {/* Animated Brand Name */}
         <motion.div className="flex justify-center mb-4 sm:mb-6 overflow-hidden" variants={containerVariants}>
-          {brandName.split("").map((letter, index) => (
-            <motion.span
-              key={index}
-              variants={letterVariants}
-              style={{ color: letterColors[index] }}
-              className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl"
-            >
-              {letter}
-            </motion.span>
-          ))}
+            {brandName.split("").map((letter, index) => (
+                <motion.span
+                key={index}
+                variants={letterVariants}
+                style={{ color: letterColors[index] }}
+                className="font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem]"
+                >
+                {letter}
+                </motion.span>
+            ))}
         </motion.div>
 
         {/* Headline */}
@@ -181,28 +181,28 @@ function Home() {
 
         {/* Social Media Icons */}
         <motion.div
-          variants={fadeInVariants}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-4 sm:mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6"
-        >
-          <a
-            href="https://www.instagram.com/brand_goto/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
-            aria-label="Follow us on Instagram"
-          >
-            <FaInstagram size={12} className="sm:size-12" />
-          </a>
-          <a
-            href="https://x.com/Brand_goto"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
-            aria-label="Follow us on X"
-          >
-            <FaXTwitter size={12} className="sm:size-12" />
-          </a>
+            variants={fadeInVariants}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-4 sm:mt-8 flex flex-row space-x-6"
+            >
+            <a
+                href="https://www.instagram.com/brand_goto/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
+                aria-label="Follow us on Instagram"
+            >
+                <FaInstagram size={24} className="sm:size-12" />
+            </a>
+            <a
+                href="https://x.com/Brand_goto"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
+                aria-label="Follow us on X"
+            >
+                <FaXTwitter size={24} className="sm:size-12" />
+            </a>
         </motion.div>
 
         {/* Contact Info */}
