@@ -1,15 +1,21 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import "animate.css";
 import logo from "../assets/black-logo.png";
 import Nologo from "../assets/logo.png";
-// import { FaInstagram, FaXTwitter } from "react-icons/fa"; 
-import { FaInstagram, FaXTwitter } from "react-icons/fa6";// Updated to FaXTwitter
+import { FaInstagram, FaXTwitter } from "react-icons/fa6"; // Ensure latest react-icons
 
 function Home() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const brandRef = useRef(null);
+
+  const { scrollY } = useScroll();
+  const topPosition = useTransform(scrollY, (value) => {
+    const threshold = 100;
+    return value > threshold ? 0 : "auto";
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -55,6 +61,15 @@ function Home() {
         stiffness: 100,
       },
     },
+    bounce: {
+      y: [0, -10, 0],
+      transition: {
+        duration: 1.5,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatType: "loop",
+      },
+    },
   };
 
   const fadeInVariants = {
@@ -77,7 +92,6 @@ function Home() {
 
   return (
     <div className="relative min-h-screen w-screen max-w-full overflow-x-hidden">
-      {/* Background Logo */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center z-0"
         initial={{ scale: 0.8, opacity: 0 }}
@@ -87,17 +101,14 @@ function Home() {
         <img src={logo} alt="Brand Logo Background" className="w-[60%] object-contain" />
       </motion.div>
 
-      {/* Solid Background Color */}
       <div className="absolute inset-0 bg-[#023942] opacity-80 z-10"></div>
 
-      {/* Main Content */}
       <motion.div
         className="relative z-20 flex flex-col items-center justify-center px-4 py-8 min-h-screen"
         initial="initial"
         animate="animate"
         variants={containerVariants}
       >
-        {/* Logo */}
         <motion.img
           src={Nologo}
           alt="Brand Logo"
@@ -107,21 +118,32 @@ function Home() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         />
 
-        {/* Animated Brand Name */}
-        <motion.div className="flex justify-center mb-4 sm:mb-6 overflow-hidden" variants={containerVariants}>
-            {brandName.split("").map((letter, index) => (
-                <motion.span
-                key={index}
-                variants={letterVariants}
-                style={{ color: letterColors[index] }}
-                className="font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem]"
-                >
-                {letter}
-                </motion.span>
-            ))}
+        <motion.div
+          ref={brandRef}
+          className="flex justify-center mb-4 sm:mb-6 overflow-hidden w-full"
+          variants={containerVariants}
+          initial="initial"
+          animate={["animate", "bounce"]}
+          style={{
+            position: scrollY.get() > 100 ? "fixed" : "relative",
+            top: topPosition,
+            left: 0,
+            right: 0,
+            zIndex: 30,
+          }}
+        >
+          {brandName.split("").map((letter, index) => (
+            <motion.span
+              key={index}
+              variants={letterVariants}
+              style={{ color: letterColors[index] }}
+              className="font-extrabold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[10rem]"
+            >
+              {letter}
+            </motion.span>
+          ))}
         </motion.div>
 
-        {/* Headline */}
         <motion.h1
           variants={fadeInVariants}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -130,7 +152,6 @@ function Home() {
           Something Amazing is Coming!
         </motion.h1>
 
-        {/* Subheading */}
         <motion.p
           variants={fadeInVariants}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -139,7 +160,6 @@ function Home() {
           We're working hard to create an incredible experience. Stay tuned for our launch!
         </motion.p>
 
-        {/* Email Subscription Form */}
         <motion.form
           onSubmit={handleSubmit}
           variants={fadeInVariants}
@@ -167,7 +187,6 @@ function Home() {
           </motion.button>
         </motion.form>
 
-        {/* Success/Error Message */}
         {message && (
           <motion.p
             initial={{ opacity: 0 }}
@@ -179,33 +198,31 @@ function Home() {
           </motion.p>
         )}
 
-        {/* Social Media Icons */}
         <motion.div
-            variants={fadeInVariants}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-4 sm:mt-8 flex flex-row space-x-6"
-            >
-            <a
-                href="https://www.instagram.com/brand_goto/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
-                aria-label="Follow us on Instagram"
-            >
-                <FaInstagram size={24} className="sm:size-12" />
-            </a>
-            <a
-                href="https://x.com/Brand_goto"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
-                aria-label="Follow us on X"
-            >
-                <FaXTwitter size={24} className="sm:size-12" />
-            </a>
+          variants={fadeInVariants}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="mt-4 sm:mt-8 flex flex-row space-x-6"
+        >
+          <a
+            href="https://www.instagram.com/brand_goto/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
+            aria-label="Follow us on Instagram"
+          >
+            <FaInstagram size={24} className="sm:size-12" />
+          </a>
+          <a
+            href="https://x.com/Brand_goto"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
+            aria-label="Follow us on X"
+          >
+            <FaXTwitter size={24} className="sm:size-12" />
+          </a>
         </motion.div>
 
-        {/* Contact Info */}
         <motion.div
           variants={fadeInVariants}
           transition={{ duration: 0.6, delay: 1 }}
