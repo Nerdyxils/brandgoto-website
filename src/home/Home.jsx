@@ -1,21 +1,14 @@
-import React, { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import "animate.css";
 import logo from "../assets/black-logo.png";
 import Nologo from "../assets/logo.png";
-import { FaInstagram, FaXTwitter } from "react-icons/fa6"; // Ensure latest react-icons
+import { FaInstagram, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
 
 function Home() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const brandRef = useRef(null);
-
-  const { scrollY } = useScroll();
-  const topPosition = useTransform(scrollY, (value) => {
-    const threshold = 100;
-    return value > threshold ? 0 : "auto";
-  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,7 +80,7 @@ function Home() {
     "#EF476F",
     "#118AB2",
     "#073B4C",
-    "#F4A261",
+    "#FF9F1C",
   ];
 
   return (
@@ -98,7 +91,7 @@ function Home() {
         animate={{ scale: 1, opacity: 0.7 }}
         transition={{ duration: 1.5, ease: "easeInOut", repeat: Infinity, repeatType: "mirror" }}
       >
-        <img src={logo} alt="Brand Logo Background" className="w-[60%] object-contain" />
+        <img src={logo} alt="Brandgoto Background Logo" className="w-[60%] object-contain" />
       </motion.div>
 
       <div className="absolute inset-0 bg-[#023942] opacity-80 z-10"></div>
@@ -111,7 +104,7 @@ function Home() {
       >
         <motion.img
           src={Nologo}
-          alt="Brand Logo"
+          alt="Brandgoto Logo"
           className="w-48 sm:w-72 h-auto mb-4 sm:mb-6 main-logo animate__animated animate__fadeInDown"
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -119,18 +112,10 @@ function Home() {
         />
 
         <motion.div
-          ref={brandRef}
           className="flex justify-center mb-4 sm:mb-6 overflow-hidden w-full"
           variants={containerVariants}
           initial="initial"
           animate={["animate", "bounce"]}
-          style={{
-            position: scrollY.get() > 100 ? "fixed" : "relative",
-            top: topPosition,
-            left: 0,
-            right: 0,
-            zIndex: 30,
-          }}
         >
           {brandName.split("").map((letter, index) => (
             <motion.span
@@ -149,8 +134,16 @@ function Home() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 sm:mb-4 text-center animate__animated animate__fadeIn"
         >
-          Something Amazing is Coming!
+          Brandgoto: Something Amazing is Coming!
         </motion.h1>
+
+        <motion.div
+          variants={fadeInVariants}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="text-white mb-6 sm:mb-8 text-center max-w-lg"
+        >
+          <p>Brandgoto is a premier digital and creative agency based in Ontario, Canada, delivering cutting-edge web design, branding, and marketing solutions.</p>
+        </motion.div>
 
         <motion.p
           variants={fadeInVariants}
@@ -208,7 +201,7 @@ function Home() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
-            aria-label="Follow us on Instagram"
+            aria-label="Follow Brandgoto on Instagram"
           >
             <FaInstagram size={24} className="sm:size-12" />
           </a>
@@ -217,9 +210,18 @@ function Home() {
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
-            aria-label="Follow us on X"
+            aria-label="Follow Brandgoto on X"
           >
             <FaXTwitter size={24} className="sm:size-12" />
+          </a>
+          <a
+            href="https://wa.me/+16479377031?text=Hi%20Brandgoto%20team,%20I’d%20love%20to%20learn%20more%20about%20your%20digital%20and%20creative%20services!"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white hover:text-[#CFF8FF] transition-colors duration-300"
+            aria-label="Chat with Brandgoto on WhatsApp"
+          >
+            <FaWhatsapp size={24} className="sm:size-12" />
           </a>
         </motion.div>
 
